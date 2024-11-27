@@ -1,69 +1,86 @@
-# **LING 460 Final Project: Pronoun Usage and Sentiment in Social Media Posts**
+# **Pronouns and Sentiment: Analyzing Emotional Context in Social Media Posts**
 
 ## **Project Overview**
-This project investigates the relationship between **personal pronoun usage** and the **sentiment** (positive, neutral, or negative) of social media posts, using a dataset of randomly sampled Twitter posts. Pronouns are a significant linguistic feature often tied to emotional tone, self-focus, or social interaction. By analyzing patterns of pronoun usage in relation to sentiment, this project aims to uncover insights into how language reflects the emotional intent of social media users.
+This project examines the relationship between **personal pronoun usage** and the **sentiment** (positive, neutral, or negative) expressed in social media posts. Pronouns, as linguistic markers, play a significant role in emotional expression, offering insight into how individuals communicate their identity and emotions online. Using a dataset of randomly sampled Twitter posts, this study seeks to uncover patterns in pronoun usage tied to the emotional tone of these posts.
 
 ---
 
 ## **Dataset Information**
-The dataset used in this analysis was sourced from Kaggle, titled **“Sentiment Analysis Dataset,”** created by Abhishek Shrivastava in 2020. Key variables in the dataset include:
+The dataset, titled **“Sentiment Analysis Dataset,”** was created by Abhishek Shrivastava in 2020 and sourced from Kaggle. It includes:
 - **`text`**: The raw content of each Twitter post.
-- **`sentiment`**: A categorical variable classifying each post's sentiment as **positive**, **neutral**, or **negative**.
+- **`sentiment`**: A categorical label indicating the sentiment of the post: **positive**, **neutral**, or **negative**.
 
-The dataset was filtered to retain only the columns relevant to this analysis: **`text`** and **`sentiment`**.
+This dataset was filtered to retain only the `text` and `sentiment` columns for analysis.
 
 ---
 
 ## **Research Goals**
-1. **Primary Question**: Is there an association between the type of pronoun usage in social media posts (e.g., first-person vs. non-first-person pronouns) and the sentiment expressed in those posts?
-2. **Hypothesis**: Certain types of pronouns, such as first-person pronouns (e.g., "I," "me," "my"), are more prevalent in specific sentiment categories (e.g., negative sentiment may show a higher frequency of self-focused pronouns).
+1. **Research Question**: Is there a relationship between the use of personal pronouns and the sentiment of social media posts?
+2. **Hypothesis**: The type of pronoun usage is linked to the sentiment:
+   - **First-person pronouns** (e.g., "I," "me") are more prevalent in **negative posts** as users express complaints or personal issues.
+   - **Second- and third-person pronouns** (e.g., "you," "they") are more common in **positive posts**, reflecting compliments or expressions of gratitude.
 
 ---
 
-## **Analysis Procedure**
+## **Procedure**
 
 ### **1. Data Preparation**
-- Filtered the dataset to include only the **`text`** and **`sentiment`** columns.
+The dataset was pre-processed to focus on pronoun usage:
+- Retained the columns `text` and `sentiment`.
 - Removed posts with missing or incomplete data.
 
 ### **2. Feature Engineering**
-Added the following columns to quantify pronoun usage:
-- **`first_person_count`**: Counts the number of first-person pronouns (e.g., "I," "me," "we") in each post.
-- **`total_pronoun_count`**: Counts all personal pronouns (e.g., "you," "they") in each post.
-- **`non_first_person_count`**: Derived by subtracting `first_person_count` from `total_pronoun_count`.
-- **`personal`**: A binary indicator classifying whether a post contains a majority of personal pronouns based on a threshold (≥50%).
+To quantify pronoun usage, the following variables were added:
+- **`first_person_count`**: The number of first-person pronouns (e.g., "I," "me") in each post.
+- **`total_pronoun_count`**: The total number of all personal pronouns (e.g., "you," "they") in each post.
+- **`non_first_person_count`**: The frequency of second- and third-person pronouns (calculated as `total_pronoun_count - first_person_count`).
+- **`personal`**: A binary indicator:
+  - **1**: Majority of pronouns are first-person.
+  - **0**: Majority of pronouns are not first-person.
 
-### **3. Statistical Testing**
-- Constructed a **contingency table** summarizing the counts of posts by **sentiment** and whether they primarily used first-person pronouns (`personal` = 1).
-- Performed a **Chi-Square Test of Independence** using the `svychisq()` function to evaluate whether there is a statistically significant association between **sentiment** and **pronoun usage**:
-  - **Independent Variable**: `sentiment` (positive, neutral, negative).
-  - **Dependent Variable**: `personal` (majority first-person pronouns or not).
+### **3. Statistical Analysis**
+- A **contingency table** was created to summarize the distribution of posts by sentiment and pronoun usage (`personal` = 1 or 0).
+- A **Chi-Square Test with a complex sampling design** was performed to assess the relationship between sentiment and pronoun usage:
+  - **Independent Variable**: Sentiment (positive, neutral, or negative).
+  - **Dependent Variable**: Whether the majority of pronouns in a post are first-person.
 
-### **4. Visualizations**
-Generated visualizations to complement the statistical analysis:
-- **Bar plots**: Displayed the distribution of pronoun usage across sentiment categories.
-- **Heatmaps**: Illustrated the intensity of pronoun usage by sentiment.
-- **Box plots**: Showed the distribution of `first_person_count` across sentiments.
-
----
-
-## **Results**
-1. **Statistical Significance**:
-   - The Chi-Square test revealed a statistically significant association between pronoun usage and sentiment, with a p-value far below 0.05.
-
-2. **Key Findings**:
-   - **Neutral posts** showed the highest proportion of personal pronouns overall.
-   - **Negative posts** had a higher frequency of first-person pronouns, reflecting a possible link between self-focus and negative emotions.
-   - **Positive posts** showed a lower overall proportion of personal pronouns compared to neutral and negative posts.
+### **4. Visualization**
+Visualizations were created to support the findings:
+- **Bar Plots**: Displayed the proportion of first-person vs. non-first-person pronouns across sentiment categories.
+- **Heatmaps**: Highlighted patterns in pronoun usage intensity by sentiment.
+- **Proportional Plots**: Showed specific pronoun types driving trends in each sentiment.
 
 ---
 
-## **Conclusion**
-This analysis demonstrates that personal pronoun usage is significantly associated with the sentiment of social media posts. These findings suggest that pronoun choice is a meaningful linguistic marker for emotional tone, particularly with first-person pronouns being more prevalent in negative sentiments. This research highlights the potential of linguistic analysis to uncover subtle emotional cues in social media text.
+## **Key Findings**
+
+### **1. Statistical Results**
+- The Chi-Square test produced a **p-value of 1.414e-07**, indicating a statistically significant association between sentiment and pronoun usage.
+- The null hypothesis (no relationship between sentiment and pronoun type) was rejected.
+
+### **2. Patterns in Pronoun Usage**
+- **First-Person Pronouns**:
+  - Found more frequently in **negative posts**, supporting the hypothesis that users express complaints or personal struggles using self-referential language.
+- **Non-First-Person Pronouns**:
+  - More prevalent in **positive posts**, reflecting a tendency to address or compliment others (e.g., "you," "your").
+
+---
+
+## **Conclusions**
+The findings strongly support the hypothesis that personal pronoun usage varies with the sentiment of social media posts. Specifically:
+- **First-person pronouns** signal self-focus and are more common in negative posts.
+- **Non-first-person pronouns** often indicate outward focus and are more common in positive posts.
+
+These results suggest that linguistic patterns, like pronoun use, are deeply connected to emotional tone. Such insights can benefit sentiment analysis tools, social media studies, and even mental health research by highlighting the role of language in emotional expression.
 
 ---
 
 ## **Future Directions**
-- Explore temporal patterns, such as how pronoun usage varies by time of day.
-- Expand the analysis to include other linguistic features (e.g., verb tense, sentence structure).
-- Investigate potential applications in mental health monitoring or automated sentiment analysis tools.
+1. **Platform-Specific Analysis**: Investigate whether these patterns hold across other platforms like Instagram or TikTok.
+2. **Demographic Impact**: Explore how factors like age or gender influence the relationship between pronouns and sentiment.
+3. **Multilingual Analysis**: Study pronoun-sentiment patterns in non-English social media posts.
+
+---
+
+## **References**
+Shrivastava, A. (2021). Sentiment Analysis Dataset. [Kaggle](https://www.kaggle.com/datasets/abhi8923shriv/sentiment-analysis-dataset).
