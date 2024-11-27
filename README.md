@@ -1,7 +1,9 @@
 # **Pronouns and Sentiment: Analyzing Emotional Context in Social Media Posts**
 
 ## **Project Overview**
-This project examines the relationship between **personal pronoun usage** and the **sentiment** (positive, neutral, or negative) expressed in social media posts. Pronouns, as linguistic markers, play a significant role in emotional expression, offering insight into how individuals communicate their identity and emotions online. Using a dataset of randomly sampled Twitter posts, this study seeks to uncover patterns in pronoun usage tied to the emotional tone of these posts.
+This project examines the relationship between **personal pronoun usage** and the **sentiment** (positive, neutral, or negative) expressed in social media posts. Pronouns, as linguistic markers, play a significant role in emotional tone, self-focus, or social interaction. By analyzing patterns of pronoun usage in relation to sentiment, this project aims to uncover insights into how language reflects the emotional intent of social media users.
+
+This project was completed as a **final project for LING 460: Making Sense of Big Data – Textual Analysis with R**.
 
 ---
 
@@ -10,7 +12,7 @@ The dataset, titled **“Sentiment Analysis Dataset,”** was created by Abhishe
 - **`text`**: The raw content of each Twitter post.
 - **`sentiment`**: A categorical label indicating the sentiment of the post: **positive**, **neutral**, or **negative**.
 
-This dataset was filtered to retain only the `text` and `sentiment` columns for analysis.
+The dataset was filtered to retain only the `text` and `sentiment` columns for analysis.
 
 ---
 
