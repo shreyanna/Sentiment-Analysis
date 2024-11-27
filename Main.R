@@ -4,7 +4,7 @@ library(stringr)
 library(survey)
 
 
-data <- read.csv("/Users/shreya/Downloads/archive123/test.csv",
+data <- read.csv("/Users/shreya/Downloads/archive123/train.csv",
                  fileEncoding = "ISO-8859-1",
                  stringsAsFactors = FALSE,
                  fill = TRUE)
